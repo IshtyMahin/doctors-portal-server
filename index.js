@@ -5,12 +5,14 @@ require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const app = express();
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.gp0wr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+
+console.log(uri);
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -186,13 +188,4 @@ app.listen(port, () => {
   console.log(`Doctors app listening on port ${port}`);
 });
 
-/* services.forEach((service) => {
-  const serviceBookings = bookings.filter(
-    (b) => b.treatment === service.name
-  );
-  const booked = serviceBookings.map((s) => s.slot);
-  const available = service.slots.filter((s) => !booked.includes(s));
-  service.available = available;
 
-  // service.booked = serviceBookings.map(s => s.slot);
-}); */
